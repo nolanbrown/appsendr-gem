@@ -1,0 +1,109 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'appsendr/app'
+require 'date'
+
+command = ARGV.shift
+case command
+when "create"
+  file_path = ARGV.shift
+  unless file_path
+    STDERR.puts "You must enter the path to an IPA or APK file"
+    exit 1
+  end
+  
+  full_file_path = File.absolute_path file_path
+  
+  file = File.new(full_file_path, 'rb') if File.exists? full_file_path
+
+  identifier= nil
+  icon_file = nil
+  
+  if ARGV.length > 0
+    identifier = ARGV.shift
+  end
+  if ARGV.length > 0
+    icon_path = ARGV.shift
+    icon_file_path = File.absolute_path icon_path
+    icon_file = File.new(icon_file_path, 'rb') if File.exists? icon_file_path
+  end
+  
+  
+  app_details = Appsendr::App.create file, icon_file, identifier
+
+  if app_details["error"]
+    STDERR.puts app_details["error"]["message"]
+    exit 1
+  end
+  
+  created_at = DateTime.parse(app_details["created_at"])
+  
+  output =  "App Details\n"
+  output += "========================\n"
+  output += "ID: #{app_details["id"]}\n"
+  output += "URL: #{app_details["url"]}\n"
+  output += "Token: #{app_details["token"]}\n"
+  output += "Filename: #{app_details["filename"]}\n"
+  output += "Created on #{created_at.strftime("%m/%d/%Y at %r")}\n"
+  output += "\n"
+
+  STDOUT.puts output
+  
+when "destroy"
+  id = ARGV.shift
+  unless id
+    STDERR.puts "You must enter an App Id"
+    exit 1
+  end
+  
+  token = ARGV.shift
+  unless token
+    STDERR.puts "You must enter an App Token"
+    exit 1
+  end
+  
+  if Appsendr::App.destroy(id, token)
+    STDOUT.puts "App was succesfully destroyed"
+  else
+    STDERR.puts "An error occured"
+    exit 1
+  end
+    
+when "details"
+  id = ARGV.shift
+  unless id
+    STDERR.puts "You must enter an App Id"
+    exit 1
+  end
+  app_details = Appsendr::App.details(id)
+  
+  if app_details["error"]
+    STDERR.puts app_details["error"]["message"]
+    exit 1
+  end
+  
+  created_at = DateTime.parse(app_details["created_at"])
+  
+  output =  "App Details\n"
+  output += "========================\n"
+  output += "ID: #{app_details["id"]}\n"
+  output += "URL: #{app_details["url"]}\n"
+  output += "Filename: #{app_details["filename"]}\n"
+  output += "Created on #{created_at.strftime("%m/%d/%Y at %r")}\n"
+  output += "\n"
+  
+  
+  STDOUT.puts output
+  
+else
+  STDOUT.puts <<-EOF
+Please provide command name
+
+Usage:
+  appsendr create <FILE PATH> <IDENTIFIER>
+  appsendr details <ID>
+  appsendr destroy <ID> <TOKEN>
+EOF
+end
