@@ -23,7 +23,9 @@ Or install it yourself as:
 Command Line
 
   appsendr create `FILE PATH` `IDENTIFIER`
+
   appsendr details `ID`
+
   appsendr destroy `ID` `TOKEN`
 
 
