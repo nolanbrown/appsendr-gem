@@ -22,18 +22,18 @@ Or install it yourself as:
 
 Command Line
 
-  appsendr create <FILE PATH> <IDENTIFIER>
-  appsendr details <ID>
-  appsendr destroy <ID> <TOKEN>
+  appsendr create `FILE PATH` `IDENTIFIER`
+  appsendr details `ID`
+  appsendr destroy `ID` `TOKEN`
 
 
 Ruby
 
-  Appsendr::App.details(<ID>)
+  Appsendr::App.details(`ID`)
 
-  Appsendr::App.create(<FILE>, <ICON FILE>, <IDENTIFIER>)
+  Appsendr::App.create(`FILE`, `ICON FILE`, `IDENTIFIER`)
 
-  Appsendr::App.destroy(<ID>, <TOKEN>)
+  Appsendr::App.destroy(`ID`, `TOKEN`)
 
 
 ## Contributing
