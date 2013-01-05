@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Command Line
+**Command Line**
 
   appsendr create `FILE PATH` `IDENTIFIER`
 
@@ -29,7 +29,7 @@ Command Line
   appsendr destroy `ID` `TOKEN`
 
 
-Ruby
+**Ruby**
 
   Appsendr::App.details(`ID`)
 
