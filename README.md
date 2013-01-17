@@ -1,8 +1,8 @@
-# Appsendr
+# AppSendr
 
-Appsendr is a free service for distributing iOS IPA and Android APK files over-the-air with a short URL. This gem is using the AppSendr V1 API.
+AppSendr is a free service for distributing iOS IPA and Android APK files over-the-air with a short URL. This gem is using the AppSendr V1 API.
 
-  http://appsendr.com
+  https://api.appsendr.com
 
 ## Installation
 

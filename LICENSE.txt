@@ -1,4 +1,4 @@
-Copyright (c) 2013 Nolan B.
+Copyright (c) 2013 Nolan Brown
 
 MIT License
 
