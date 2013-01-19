@@ -4,7 +4,7 @@ require "rest-client"
 
 module Appsendr  
   class App
-    API_BASE_URL = "http://api.ota.dev:9393/"
+    API_BASE_URL = "https://api.appsendr.com"
     
     def self.create(file,icon=nil,identifier=nil)
       #File.new("test.apk", 'rb')
