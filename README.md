@@ -31,6 +31,10 @@ Or install it yourself as:
 
 **Ruby**
 
+Require the gem at the top of your ruby file with the following line:
+
+  `require 'appsendr/app'`
+
   Appsendr::App.details(`ID`)
 
   Appsendr::App.create(`FILE`, `ICON FILE`, `IDENTIFIER`)
